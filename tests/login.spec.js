@@ -1,13 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test("user can log in", async ({ page }) => {
-  await page.goto("https://example.com/login");
+test("auto-heal selector demo", async ({ page }) => {
+  await page.goto("https://example.com");
 
-  // ❌ Intentionally fragile selector (will likely break)
-  await page.fill("#email-input", "test@example.com");
-  await page.fill("#password-input", "password123");
+  // ❌ Intentionally wrong selector
+  await page.click("a.login-button");
 
-  await page.click("button.login-btn");
-
-  await expect(page).toHaveURL(/dashboard/);
+  // Page actually has: a[href]
+  await expect(page).toHaveTitle(/Example Domain/);
 });
