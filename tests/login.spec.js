@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test("auto-heal selector demo", async ({ page }) => {
-  await page.goto("https://example.com");
+test("auto-heal demo", async ({ page }) => {
+  await page.goto("https://playwright.dev");
 
-  // ❌ Intentionally wrong selector
-  await page.click("a.login-button");
+  // ❌ outdated selector
+  await page.click("a.get-started");
 
-  // Page actually has: a[href]
-  await expect(page).toHaveTitle(/Example Domain/);
+  // ✅ real element exists with text "Get started"
+  await expect(page).toHaveURL(/docs/);
 });
